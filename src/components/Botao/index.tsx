@@ -8,3 +8,5 @@ class Botao extends React.Component{
 }
 
 export default Botao;
+
+// componente possui uma tag pai do HTML
