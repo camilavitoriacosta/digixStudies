@@ -1,8 +1,8 @@
-import Botao from "./components/Botao";
+import Formulario from "./components/Formulario";
 
 function App() {
   return (
-    <Botao />
+    <Formulario />
   );
 }
 
