@@ -4,13 +4,14 @@ import style from "./Botao.module.scss";
 class Botao extends React.Component<
     {
         children: any, 
-        type?: "button" | "reset" | "submit" | undefined
+        type?: "button" | "reset" | "submit" | undefined,
+        onClick?: () => void
     }> 
 {
     render() {
-        const {type = "button"} = this.props;
+        const {type = "button", onClick} = this.props;
         return (
-            <button type={type} className={style.botao}> {this.props.children} </button>
+            <button type={type} className={style.botao} onClick={onClick}> {this.props.children} </button>
         );
     }
 }

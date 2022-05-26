@@ -6,10 +6,11 @@ import style from './Cronometro.module.scss';
 import Relogio from './Relogio';
 
 interface Props {
-    selecionado: ITarefa | undefined
+    selecionado: ITarefa | undefined,
+    finalizarTarefa: () => void
 }
 
-export default function Cronometro({ selecionado }: Props) {
+export default function Cronometro({ selecionado, finalizarTarefa }: Props) {
     const [tempo, setTempo] = useState<number>();
 
     useEffect(() => {
@@ -18,13 +19,25 @@ export default function Cronometro({ selecionado }: Props) {
         }
     }, [selecionado]);
 
+    function regressiva(contador : number = 0) {
+        setTimeout(() => {
+            if(contador > 0){
+                setTempo(contador - 1)
+                return regressiva(contador - 1);
+            }
+            finalizarTarefa();
+        }, 1000);
+    }
+
     return (
         <div className={style.cronometro}>
             <p className='titulo'>Escolha um card e inicie o cronometro</p>
             <div className={style.relogioWrapper}>
-                <Relogio tempo={tempo}/>
+                <Relogio tempo={tempo} />
             </div>
-            <Botao>Iniciar</Botao>
+            <Botao onClick={() => regressiva(tempo)
+                
+            }>Iniciar</Botao>
         </div>
     );
 }
