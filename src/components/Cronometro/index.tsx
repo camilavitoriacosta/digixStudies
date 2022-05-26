@@ -7,10 +7,11 @@ import Relogio from './Relogio';
 
 interface Props {
     selecionado: ITarefa | undefined,
-    finalizarTarefa: () => void
+    finalizarTarefa: () => void,
+    setCronometro: (cronometroAtivado : boolean) => void
 }
 
-export default function Cronometro({ selecionado, finalizarTarefa }: Props) {
+export default function Cronometro({ selecionado, finalizarTarefa, setCronometro }: Props) {
     const [tempo, setTempo] = useState<number>();
 
     useEffect(() => {
@@ -20,13 +21,18 @@ export default function Cronometro({ selecionado, finalizarTarefa }: Props) {
     }, [selecionado]);
 
     function regressiva(contador : number = 0) {
+        // Bloquear Lista
+        setCronometro(true);
         setTimeout(() => {
             if(contador > 0){
                 setTempo(contador - 1)
                 return regressiva(contador - 1);
             }
             finalizarTarefa();
+            // Desbloquear Lista
+            setCronometro(false);
         }, 1000);
+
     }
 
     return (
@@ -35,9 +41,7 @@ export default function Cronometro({ selecionado, finalizarTarefa }: Props) {
             <div className={style.relogioWrapper}>
                 <Relogio tempo={tempo} />
             </div>
-            <Botao onClick={() => regressiva(tempo)
-                
-            }>Iniciar</Botao>
+            <Botao onClick={() => regressiva(tempo)}>Iniciar</Botao>
         </div>
     );
 }

@@ -8,6 +8,7 @@ import style from "./App.module.scss";
 function App() {
   const [tarefas, setTarefas] = useState<ITarefa[]>([]);
   const [valorSelecionado, setSelecionado] = useState<ITarefa>();
+  const [cronometroAtivado, setCronometro] = useState<boolean>();
 
   function selecionarTarefa(tarefaSelecionada: ITarefa) {
     setSelecionado(tarefaSelecionada);
@@ -37,8 +38,8 @@ function App() {
   return (
     <div className={style.AppStyle}>
       <Formulario setTarefas={setTarefas} />
-      <Cronometro selecionado={valorSelecionado} finalizarTarefa={finalizarTarefa} />
-      <Lista tarefas={tarefas} selecionarTarefa={selecionarTarefa} />
+      <Cronometro selecionado={valorSelecionado} finalizarTarefa={finalizarTarefa} setCronometro={setCronometro} />
+      <Lista tarefas={tarefas} selecionarTarefa={selecionarTarefa} cronometroAtivado={cronometroAtivado}/>
     </div>
   );
 }
