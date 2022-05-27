@@ -21,10 +21,10 @@ export default function Cronometro({ selecionado, finalizarTarefa, setCronometro
     }, [selecionado]);
 
     function regressiva(contador : number = 0) {
-        // Bloquear Lista
-        setCronometro(true);
         setTimeout(() => {
             if(contador > 0){
+                // Bloquear Lista
+                setCronometro(true);
                 setTempo(contador - 1)
                 return regressiva(contador - 1);
             }
